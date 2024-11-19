@@ -1,0 +1,334 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealEyez</title>
+    <link href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #0A3B40, #0F0F10);
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: rgba(0, 0, 0, 0.8);
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      header .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      .real {
+            color: #00bcd4; /* Example color for 'Real' */
+      }
+      .eyez {
+          color: #fff; /* Example color for 'Eyez' */
+      }
+
+      header nav a {
+        color: #ffffff;
+        margin: 0 15px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      header nav a:hover {
+        color: #00bcd4;
+      }
+      .hero {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+        min-height: 100vh;
+        background: black;
+        padding: 20px;
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      .hero .content {
+        flex: 1;
+        padding-left:1.4rem;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        color: #00bcd4;
+        margin-bottom: 15px;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+      }
+
+      .hero button {
+        padding: 10px 20px;
+        background: #00bcd4;
+        border: none;
+        color: #ffffff;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+      }
+
+      .hero button:hover {
+        background: #0099a6;
+      }
+
+      .hero .hero-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero .hero-image img {
+        width: 90%;
+        max-width: 500px;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .features {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 40px 20px;
+        background: black
+      }
+
+      .features .feature-box {
+        text-align: center;
+        width: 30%;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+      }
+
+      .features .feature-box:hover {
+        transform: translateY(-10px);
+      }
+
+      .features .icon {
+        font-size: 3rem;
+        color: #00bcd4;
+        margin-bottom: 10px;
+      }
+
+      .features h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #00bcd4;
+      }
+
+      .features p {
+        font-size: 1rem;
+        color: #ffffff;
+      }
+
+      .mission {
+        text-align: center;
+        padding: 40px 20px;
+        background: black
+      }
+
+      .mission h2 {
+        color: #00bcd4;
+        margin-bottom: 15px;
+      }
+
+      .mission p {
+        font-size: 1rem;
+      }
+
+      footer {
+        background: black;
+        padding: 20px;
+        text-align: center;
+        color: #fff;
+      }
+
+      footer p {
+        font-size: 0.9rem;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero {
+          flex-direction: column;
+        }
+
+        .hero .hero-image {
+          margin-top: 20px;
+        }
+
+        .features {
+          flex-direction: column;
+        }
+
+        .features .feature-box {
+          width: 80%;
+          margin-bottom: 20px;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+      }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <span class="real">Real</span><span class="eyez">Eyez</span>
+      <img src="{% static 'images/logo.png' %}" alt="RealEyez Logo" class="logo" style="width: 50px; height: 50px;" />
+    </div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/about/">About Us</a>
+      <a href="/contact/">Contact</a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}">Logout</a>
+      {% else %}
+          <a href="{% url 'login' %}">Login</a>
+      {% endif %}
+    </nav>
+  </header>
+    {% block content %}
+    <section class="hero" id="home">
+      <div class="content">
+        <h1>LEARN TO TRUST WHAT YOU SEE</h1>
+        <p>With our cutting-edge model and insight, we help you distinguish authentic visuals from AI-generated ones.</p>
+        {% if user.is_authenticated %}
+        <button onclick="location.href='{% url 'upload' %}'">Test Here</button>
+        {% else %}
+        <!-- If the user is not logged in, show the login button -->
+            <button onclick="location.href='{% url 'login' %}'">Get Started</button>
+        {% endif %}
+      </div>
+      <div class="hero-image">
+        <img src="{% static 'images/hero.png' %}" alt="Hero Image">
+      </div>
+    </section>
+  
+    <section class="features">
+      <div class="feature-box">
+        <div class="icon">
+          <i class="uil uil-headphones-alt"></i>
+        </div>
+        <h3>Customer Support</h3>
+        <p>We offer excellent and dedicated support for every need.</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon">
+          <i class="uil uil-chart-growth"></i>
+        </div>
+        <h3>Excellent Growth</h3>
+        <p>Track and achieve outstanding growth with our insights.</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon">
+          <i class="uil uil-shield-check"></i>
+        </div>
+        <h3>Trustworthy & Accurate</h3>
+        <p>Reliable results every single time you use our tool.</p>
+      </div>
+    </section>
+  
+    <section class="mission">
+      <h2>Our Mission</h2>
+      <p>At Real vs AI-generated Image Prediction, our mission is to empower individuals, businesses, and organizations to confidently navigate the digital landscape. By leveraging cutting-edge artificial intelligence and machine learning, we aim to provide tools that can distinguish authentic visuals from AI-generated ones with unparalleled accuracy. Our goal is to promote transparency, trust, and awareness in a world increasingly influenced by synthetic media, ensuring that every decision you make is based on reliable, verified information.</p>
+    </section>
+    <section class="reviews">
+      <h2 class="text-center" style="color: #00bcd4; margin-top: 20px;">What Our Users Say</h2>
+      <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel" style="padding: 40px 20px;">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="text-center" style="color: #ffffff;">
+              <p class="lead">"This tool has been a game-changer for my team! The accuracy is outstanding."</p>
+              <h5>- Alex J.</h5>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="text-center" style="color: #ffffff;">
+              <p class="lead">"I can finally trust the visuals I use in my presentations. Great work!"</p>
+              <h5>- Samantha K.</h5>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="text-center" style="color: #ffffff;">
+              <p class="lead">"Amazing customer support and reliable results. Highly recommended!"</p>
+              <h5>- Daniel P.</h5>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    {% endblock %}
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Detection App | All Rights Reserved</p>
+      <div>
+          <a href="https://www.facebook.com/profile.php?id=100015171163439" class="text-white mx-2"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://github.com/dnyanda123" class="text-white mx-2"><i class="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/dinny__n/" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+      </div>
+    </footer>
+
+</body>
+</html>
