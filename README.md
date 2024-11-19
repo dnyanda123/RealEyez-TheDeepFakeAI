@@ -2,7 +2,7 @@
 RealEyez is a machine learning-based project designed to detect whether an image is real or AI-generated. This web application utilizes a Convolutional Neural Network (CNN) model based on EfficientNet to classify images. The project is built using Django for the web framework and integrates an AI model that analyzes images and predicts their authenticity.
 
 ## Project Video
-Link: 
+https://github.com/user-attachments/assets/fd5b5b5e-0034-4931-9087-067aabbc488e
 
 ## Table of Content
 - Features
