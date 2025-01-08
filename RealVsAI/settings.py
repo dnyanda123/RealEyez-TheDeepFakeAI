@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-wq6z0#x&p0$bul2q)gvz9(86-z!(t#84f1gn^0t*n4@y+)$1su
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ 'realeyez-thedeepfakeai-1.onrender.com    ', '127.0.0.1', 'localhost' ]
+ALLOWED_HOSTS = [ 'realeyez-thedeepfakeai-1.onrender.com', '127.0.0.1', 'localhost' ]
 
 
 # Application definition
