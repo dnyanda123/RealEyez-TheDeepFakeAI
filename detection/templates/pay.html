@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Methods</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Select Your Payment Method</h1>
+        
+        <!-- Payment Form -->
+        <form method="post" action="{% url 'payment' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="payment" class="form-label">Choose a Payment Method</label>
+                <select class="form-select" id="payment" name="payment" required>
+                    <option value="">Select an Option</option>
+                    <option value="credit_card">Credit Card</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="stripe">Stripe</option>
+                </select>
+            </div>
+
+            <!-- Conditional fields for Credit Card -->
+            <div id="credit_card_details" class="payment-details" style="display: none;">
+                <div class="mb-3">
+                    <label for="credit_card_number" class="form-label">Credit Card Number</label>
+                    <input type="text" class="form-control" id="credit_card_number" name="credit_card_number" placeholder="Enter Card Number">
+                </div>
+                <div class="mb-3">
+                    <label for="credit_card_expiry" class="form-label">Expiration Date</label>
+                    <input type="text" class="form-control" id="credit_card_expiry" name="credit_card_expiry" placeholder="MM/YY">
+                </div>
+                <div class="mb-3">
+                    <label for="credit_card_cvc" class="form-label">CVC</label>
+                    <input type="text" class="form-control" id="credit_card_cvc" name="credit_card_cvc" placeholder="Enter CVC">
+                </div>
+            </div>
+
+            <!-- Conditional fields for PayPal -->
+            <div id="paypal_details" class="payment-details" style="display: none;">
+                <div class="mb-3">
+                    <label for="paypal_email" class="form-label">PayPal Email</label>
+                    <input type="email" class="form-control" id="paypal_email" name="paypal_email" placeholder="Enter your PayPal Email">
+                </div>
+            </div>
+
+            <!-- Conditional fields for Stripe -->
+            <div id="stripe_details" class="payment-details" style="display: none;">
+                <div class="mb-3">
+                    <label for="stripe_token" class="form-label">Stripe Token</label>
+                    <input type="text" class="form-control" id="stripe_token" name="stripe_token" placeholder="Stripe Payment Token">
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Submit Payment</button>
+        </form>
+    </div>
+
+    <!-- Add JavaScript to dynamically show payment fields based on selection -->
+    <script>
+        document.getElementById('payment').addEventListener('change', function() {
+            // Hide all payment method details
+            document.querySelectorAll('.payment-details').forEach(function(element) {
+                element.style.display = 'none';
+            });
+
+            // Show the relevant payment details based on the selected method
+            if (this.value === 'credit_card') {
+                document.getElementById('credit_card_details').style.display = 'block';
+            } else if (this.value === 'paypal') {
+                document.getElementById('paypal_details').style.display = 'block';
+            } else if (this.value === 'stripe') {
+                document.getElementById('stripe_details').style.display = 'block';
+            }
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

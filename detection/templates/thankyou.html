@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #0A3B40, #0F0F10); /* Updated gradient */
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .thank-you-container {
+            text-align: center;
+            background: #ffffff;
+            color: #333333;
+            max-width: 600px;
+            width: 100%;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .thank-you-container img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #0A3B40;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .thank-you-btn {
+            display: inline-block;
+            background: linear-gradient(to right, #0A3B40, #0F0F10); /* Matching button gradient */
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(10, 59, 64, 0.4);
+        }
+
+        .thank-you-btn:hover {
+            background: linear-gradient(to right, #0F0F10, #0A3B40); /* Reverse gradient effect on hover */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(10, 59, 64, 0.6);
+        }
+
+        .details-section {
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: #555555;
+            border-top: 1px solid #dddddd;
+            padding-top: 15px;
+        }
+
+        .details-section span {
+            font-weight: 600;
+            color: #333333;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .thank-you-btn {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <!-- Replace the below image link with a custom icon -->
+        <img src="https://via.placeholder.com/100/0A3B40/FFFFFF?text=✓" alt="Success Icon">
+        <h1>Thank You!</h1>
+        <p>Your purchase was successful. Your plan has been activated, and you can start enjoying all the features immediately.</p>
+        <a href="/" class="thank-you-btn">Return to Homepage</a>
+
+        <div class="details-section">
+            <p>Transaction ID: <span>#12345XYZ</span></p>
+            <p>Plan: <span>Premium</span></p>
+            <p>Start Date: <span>Jan 8, 2025</span></p>
+        </div>
+    </div>
+</body>
+</html>

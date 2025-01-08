@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Image</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        font-family: 'Arial', sans-serif;
+      }
+
+      .container {
+        max-width: 700px;
+        margin-top: 50px;
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 30px;
+      }
+
+      .card {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-body {
+        padding: 30px;
+        background: #fff;
+        border-radius: 12px;
+      }
+
+      .form-group label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .form-control {
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        padding: 12px;
+      }
+
+      .btn-primary {
+        background-color: #2575fc;
+        border-color: #2575fc;
+        border-radius: 25px;
+        padding: 12px 30px;
+        width: 100%;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        background-color: #1e60b4;
+        border-color: #1e60b4;
+        transform: translateY(-5px);
+      }
+
+      /* Drag & Drop styling */
+      .drag-drop-container {
+        border: 2px dashed #2575fc;
+        border-radius: 10px;
+        padding: 40px;
+        text-align: center;
+        cursor: pointer;
+        background-color: #f9f9f9;
+        transition: background-color 0.3s ease;
+      }
+
+      .drag-drop-container:hover {
+        background-color: #e9f4ff;
+      }
+
+      .drag-drop-text {
+        color: #2575fc;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .drag-drop-text p {
+        margin-top: 10px;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 576px) {
+        h2 {
+          font-size: 2rem;
+        }
+
+        .container {
+          padding: 20px;
+        }
+
+        .drag-drop-container {
+          padding: 20px;
+        }
+      }
+
+      /* Animation */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .card {
+        animation: fadeIn 1.5s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    {% extends 'home.html' %}
+    {% block content %}
+    <br><br>
+    <div class="container mt-5">
+      <h2 class="text-center">Upload Image for Prediction</h2>
+      <div class="card">
+        <div class="card-body">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="id_image">{{ form.image.label }}</label>
+              <div class="drag-drop-container" id="drag-drop-area">
+                <div class="drag-drop-text">
+                  <p>Drag and Drop an Image Here</p>
+                  <p>OR</p>
+                  {{ form.image }}
+                </div>
+                <input
+                  type="file"
+                  name="image"
+                  id="id_image"
+                  style="display: none;"
+                  accept="image/*"
+                />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <br><br>
+    {% endblock %}
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      // Drag & Drop functionality
+      const dragDropArea = document.getElementById("drag-drop-area");
+      const fileInput = document.getElementById("id_image");
+
+      dragDropArea.addEventListener("click", function () {
+        fileInput.click(); // Trigger the file input when the area is clicked
+      });
+
+      dragDropArea.addEventListener("dragover", function (event) {
+        event.preventDefault();
+        dragDropArea.style.backgroundColor = "#e9f4ff"; // Change background on drag over
+      });
+
+      dragDropArea.addEventListener("dragleave", function () {
+        dragDropArea.style.backgroundColor = ""; // Reset background when drag leaves
+      });
+
+      dragDropArea.addEventListener("drop", function (event) {
+        event.preventDefault();
+        const file = event.dataTransfer.files[0];
+        if (file) {
+          fileInput.files = event.dataTransfer.files; // Set the file to input element
+        }
+        dragDropArea.style.backgroundColor = ""; // Reset background after drop
+      });
+    </script>
+  </body>
+</html>
