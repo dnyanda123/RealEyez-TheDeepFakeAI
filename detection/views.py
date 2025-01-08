@@ -15,7 +15,7 @@ from PIL import Image  # Correct import for handling images
 import os
 
 # Load model once during server startup
-MODEL_PATH = os.path.join('detection', 'models', 'efficientnet_model.keras')
+MODEL_PATH = os.path.join('detection', 'models', 'efficientnet_model.h5')
 model = load_model(MODEL_PATH)
 
 def predict_image(image):
